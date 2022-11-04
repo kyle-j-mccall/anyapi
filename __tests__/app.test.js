@@ -24,7 +24,7 @@ describe('books route', () => {
   it('/books/:id should return a book detail based on id', async () => {
     const res = await request(app).get('/books/1');
     const expected = {
-      id: 1,
+      id: '1',
       title: 'Island',
       author: 'Aldous Huxley',
       yearPublished: 1962,
