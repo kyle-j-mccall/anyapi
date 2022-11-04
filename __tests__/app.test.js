@@ -32,9 +32,6 @@ describe('books route', () => {
     };
     expect(res.body).toEqual(expected);
   });
-  // afterAll(() => {
-  //   pool.end();
-  // });
 });
 
 describe('/movies route', () => {
@@ -46,6 +43,17 @@ describe('/movies route', () => {
     const expected = movies.map((movie) => {
       return { ...movie };
     });
+    expect(res.body).toEqual(expected);
+  });
+
+  it('/movies/:id should return movie details', async () => {
+    const res = await request(app).get('/movies/1');
+    const expected = {
+      id: '1',
+      title: 'Interstellar',
+      yearReleased: 2014,
+      genre: 'sci-fi',
+    };
     expect(res.body).toEqual(expected);
   });
   afterAll(() => {
