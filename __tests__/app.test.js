@@ -1,7 +1,7 @@
 const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
-const { request } = require('express');
-// const request = require('supertest');
+
+const request = require('supertest');
 const app = require('../lib/app');
 const { books } = require('../lib/books-data');
 
@@ -17,7 +17,20 @@ describe('books route', () => {
         author: book.author,
       };
     });
-    expect(res).toEqual(expected);
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('/books/:id should return a book detail based on id', async () => {
+    const res = await request(app).get('/books/1');
+    const expected = {
+      id: 1,
+      title: 'Island',
+      author: 'Aldous Huxley',
+      yearPublished: 1962,
+      genre: 'Philosophy',
+    };
+    expect(res.body).toEqual(expected);
   });
   afterAll(() => {
     pool.end();
