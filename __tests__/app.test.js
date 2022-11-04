@@ -1,9 +1,9 @@
 const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
-
 const request = require('supertest');
 const app = require('../lib/app');
 const { books } = require('../lib/books-data');
+const { movies } = require('../lib/movies-data');
 
 describe('books route', () => {
   beforeEach(() => {
@@ -30,6 +30,22 @@ describe('books route', () => {
       yearPublished: 1962,
       genre: 'Philosophy',
     };
+    expect(res.body).toEqual(expected);
+  });
+  afterAll(() => {
+    pool.end();
+  });
+});
+
+describe('/movies route', () => {
+  beforeEach(() => {
+    return setup(pool);
+  });
+  it('/movies returns a list of movies', async () => {
+    const res = await request(app).get('/movies');
+    const expected = movies.map((movie) => {
+      return { ...movie };
+    });
     expect(res.body).toEqual(expected);
   });
   afterAll(() => {

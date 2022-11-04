@@ -16,4 +16,20 @@ VALUES
 ('The Hobbit', 'J.R.R Tolkein', 1937, 'Fantasy'),
 ('Be Here Now', 'Ram Dass', 1971, 'Spirituality'),
 ('Harry Potter', 'J.K Rowling', 1997, 'Fantasy'),
-('Dune', 'Frank Herbert', 1965, 'Sci-fi')
+('Dune', 'Frank Herbert', 1965, 'Sci-fi');
+
+DROP TABLE IF EXISTS movies;
+
+CREATE TABLE movies (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  title VARCHAR NOT NULL,
+  year_released  INT NOT NULL,
+  genre VARCHAR NOT NULL
+);
+
+INSERT INTO movies (title, year_released, genre) 
+VALUES
+('Interstellar', 2014, 'sci-fi'),
+('The Black Phone', 2022, 'horror'),
+('This Is The End', 2013, 'comedy'),
+('Ex Machina', 2014, 'sci-fi')
